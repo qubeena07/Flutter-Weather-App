@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: BlocProvider(
         create: (context) => WeatherBloc(weatherRepo: WeatherRepo()),
-        child: const SearchScreen(),
+        child: SearchScreen(),
       ),
     );
   }

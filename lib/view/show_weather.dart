@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/bloc/weather_bloc.dart';
 import 'package:weather_app/model/weather_model.dart';
 
-// ignore: must_be_immutable
 class ShowWeather extends StatelessWidget {
   ShowWeather({Key? key, required this.city, required this.weather})
       : super(key: key);
@@ -14,6 +13,7 @@ class ShowWeather extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print(city.toString());
     return Column(
       children: [
         Text(

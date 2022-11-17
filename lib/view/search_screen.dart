@@ -5,13 +5,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/bloc/weather_bloc.dart';
 import 'package:weather_app/view/show_weather.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  final TextEditingController weatherController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final weatherBloc = BlocProvider.of<WeatherBloc>(context);
-    final TextEditingController weatherController = TextEditingController();
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -59,6 +71,10 @@ class SearchScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: TextFormField(
+                            // textInputAction: TextInputAction.done,
+                            onFieldSubmitted: (value) => weatherBloc.add(
+                                FetchWeather(
+                                    weatherController.text.toString())),
                             textAlign: TextAlign.center,
                             controller: weatherController,
                             decoration: const InputDecoration(
@@ -99,9 +115,8 @@ class SearchScreen extends StatelessWidget {
                   );
                 } else if (state is WeatherLoaded) {
                   return ShowWeather(
-                    weather: state.getWeather,
-                    city: weatherController.text.toString(),
-                  );
+                      weather: state.getWeather,
+                      city: weatherController.text.toString());
                 } else {
                   return const Text("Error");
                 }
