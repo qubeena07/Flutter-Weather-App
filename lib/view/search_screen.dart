@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_app/bloc/weather_bloc.dart';
 import 'package:weather_app/view/show_weather.dart';
 
@@ -16,10 +17,14 @@ class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController weatherController = TextEditingController();
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    weatherController.clear();
   }
+
+  DateTime nowDateTime = DateTime.now();
+  // String datFormat = nowx
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +53,20 @@ class _SearchScreenState extends State<SearchScreen> {
               decoration: const BoxDecoration(
                   image:
                       DecorationImage(image: AssetImage("assets/weather.png"))),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            SizedBox(
+              height: 100,
+              width: 135,
+              child: Text(
+                DateFormat.Hms().format(nowDateTime).toString(),
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 30),
+              ),
             ),
             const SizedBox(
               height: 8,
